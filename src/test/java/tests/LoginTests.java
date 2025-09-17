@@ -16,8 +16,8 @@ public class LoginTests extends AppiumConfig {
 //        boolean result = new SplashScreen(driver)
 //                .checkCurrentVersion("Version 1.0.0")
         boolean result = new AuthenticationScreen(driver)
-                .fillEmail("margo@gmail.com")
-                .fillPassword("Mmar123456$")
+                .fillEmail("dusm5@gmail.com")
+                .fillPassword("Dudu12345@")
                 .submitLogin()
                 .isActivityTitleDisplayed("Contact list");
         Assert.assertTrue(result);
@@ -29,12 +29,55 @@ public class LoginTests extends AppiumConfig {
 //                .checkCurrentVersion("Version 1.0.0")
         boolean result = new AuthenticationScreen(driver)
                 .fillLoginRegistrationForm(Auth.builder()
-                        .email("margo@gmail.com")
-                        .password("Mmar123456$").build())
+                        .email("dusm5@gmail.com")
+                        .password("Dudu12345@").build())
                 .submitLogin()
                 .isActivityTitleDisplayed("Contact list");
         Assert.assertTrue(result);
 
+    }
+
+    @Test
+    public void loginSuccessModel2() {
+        Assert.assertTrue(new AuthenticationScreen(driver)
+                .fillLoginRegistrationForm(Auth.builder()
+                        .email("dusm5@gmail.com")
+                        .password("Dudu12345@").build())
+                .submitLogin()
+                .isActivityTitleDisplayed("Contact list"));
+    }
+
+    @Test
+    public void loginWrongEmail() {
+        new AuthenticationScreen(driver)
+                .fillLoginRegistrationForm(Auth.builder()
+                        .email("dusm@gmail.com")
+                        .password("Dudu12345@")
+                        .build())
+                .submitLoginNegative()
+                .isErrorMassageHasText("Login or Password incorrect");
+    }
+
+    @Test
+    public void loginWrongPassword() {
+        new AuthenticationScreen(driver)
+                .fillLoginRegistrationForm(Auth.builder()
+                        .email("dusm5@gmail.com")
+                        .password("Dusm1")
+                        .build())
+                .submitLoginNegative()
+                .isErrorMassageHasText("Login or Password incorrect");
+    }
+
+    @Test
+    public void loginUnregisteredUser() {
+        new AuthenticationScreen(driver)
+                .fillLoginRegistrationForm(Auth.builder()
+                        .email("dusm1589@gmail.com")
+                        .password("Dudu12345@")
+                        .build())
+                .submitLoginNegative()
+                .isErrorMassageHasText("Login or Password incorrect");
     }
 
     @AfterMethod
