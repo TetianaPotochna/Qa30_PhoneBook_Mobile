@@ -24,8 +24,9 @@ public class BaseScreen {
         element.clear();
         if (text != null) {
             element.sendKeys(text);
+            driver.hideKeyboard();
         }
-     //   driver.hideKeyboard();
+
     }
 
     public boolean isShouldHave(AndroidElement element, String text, int time) {

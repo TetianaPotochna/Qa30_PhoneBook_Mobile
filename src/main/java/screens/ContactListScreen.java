@@ -120,11 +120,10 @@ public class ContactListScreen extends BaseScreen{
 
 
     public ContactListScreen removeAllContacts() {
-        pause(1000);
-        while (contactList.size()>0) {
-            deleteFirstContact();
-        }
-        return this;
+       while (contactList.size()>0){
+           deleteFirstContact();
+       }
+       return this;
     }
 
     public ContactListScreen isNoContactsHere() {

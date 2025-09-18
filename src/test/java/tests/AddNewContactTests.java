@@ -23,7 +23,7 @@ public class AddNewContactTests extends AppiumConfig {
                 .isActivityTitleDisplayed("Contact list");
     }
 
-    @Test
+    @Test(invocationCount = 3)
     public void createNewContactSuccess() {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
 
@@ -42,7 +42,6 @@ public class AddNewContactTests extends AppiumConfig {
                 .submitContactForm()
                 .isContactAddedByName(contact.getName(), contact.getLastName());
     }
-
 
     @Test
     public void createNewContactSuccessReq() {
